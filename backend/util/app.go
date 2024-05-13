@@ -82,8 +82,16 @@ func Start() {
 
 func Shutdown(code int) {
 	if !exiting {
-		exiting = true
-		DispatchEvent(ShutdownEvent, code)
+		Stop(code)
 		os.Exit(code)
 	}
+}
+
+// Stop alternative shutdown method (set the state and launch the event)
+func Stop(code int) {
+	if !exiting {
+		exiting = true
+		DispatchEvent(ShutdownEvent, code)
+	}
+
 }

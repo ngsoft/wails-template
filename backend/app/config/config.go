@@ -7,10 +7,10 @@ import (
 var (
 	defaultConfig = map[string]interface{}{
 		"Title":             "goapp",
-		"Width":             1024,
-		"Height":            768,
-		"MinWidth":          0,
-		"MinHeight":         0,
+		"Width":             0,
+		"Height":            0,
+		"MinWidth":          1024,
+		"MinHeight":         768,
 		"MaxWidth":          0,
 		"MaxHeight":         0,
 		"DisableResize":     false,
@@ -28,7 +28,15 @@ var (
 		"DisableWindowIcon":    false,
 	}
 
-	config = util.NewConfig(defaultConfig)
+	config = util.NewConfig(
+		defaultConfig,
+		// put your overrides, extra config there
+		map[string]interface{}{
+			"Title": "Wails + Svelte + Tailwind + AOS Demo",
+			// "HideWindowOnClose": true,
+			// "EnableSystray": true,
+		},
+	)
 )
 
 func Config() *util.Configuration {

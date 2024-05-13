@@ -7,13 +7,6 @@ import (
 	"goapp/backend/util"
 )
 
-const (
-	Startup  util.EventType = "wails.start"
-	Ready    util.EventType = "wails.ready"
-	Shutdown util.EventType = "wails.shutdown"
-	Close    util.EventType = "wails.beforeclose"
-)
-
 type wailsapp struct {
 	ctx context.Context
 }
@@ -24,18 +17,18 @@ func (a *wailsapp) onStartup(ctx context.Context) {
 	service.Service(ctx)
 	// tray.Tray(ctx)
 	util.Start()
-	util.DispatchEvent(Startup, ctx)
+	util.DispatchEvent(app.Startup, ctx)
 }
 
 func (a *wailsapp) onDomReady(ctx context.Context) {
-	util.DispatchEvent(Ready, ctx)
+	util.DispatchEvent(app.Ready, ctx)
 }
 
 func (a *wailsapp) onShutdown(ctx context.Context) {
-	util.DispatchEvent(Shutdown, ctx)
+	util.DispatchEvent(app.Shutdown, ctx)
 }
 
 func (a *wailsapp) beforeClose(ctx context.Context) bool {
-	util.DispatchEvent(Close, ctx)
-	return util.IsStopping()
+	util.DispatchEvent(app.Close, ctx)
+	return !util.IsStopping()
 }

@@ -65,8 +65,11 @@
     }
 
     onMount(() => {
+        delay = Math.min(3000, delay);
+        duration = Math.min(3000, duration);
         init();
         increment();
+
     });
 
 
@@ -75,17 +78,17 @@
 {#if (transition && ($ready || force))}
 
     <div
-            bind:this={$root}
-            class="{extraClass}"
-            use:onLoad
-            data-aos={transition}
-            data-aos-offset={encode(offset)}
-            data-aos-delay={encode(delay)}
-            data-aos-duration={encode(duration)}
-            data-aos-easing={encode(easing)}
-            data-aos-mirror={encode(mirror)}
-            data-aos-once={encode(once)}
-            data-aos-anchor-placement={placement}>
+        bind:this={$root}
+        class="{extraClass}"
+        use:onLoad
+        data-aos={transition}
+        data-aos-offset={encode(offset)}
+        data-aos-delay={encode(delay)}
+        data-aos-duration={encode(duration)}
+        data-aos-easing={encode(easing)}
+        data-aos-mirror={encode(mirror)}
+        data-aos-once={encode(once)}
+        data-aos-anchor-placement={placement}>
         <slot/>
     </div>
 
