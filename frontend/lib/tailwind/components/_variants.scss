@@ -1,0 +1,38 @@
+$variants: (
+        'slate',
+        'gray',
+        'zinc',
+        'stone',
+        'red',
+        'orange',
+        'amber',
+        'yellow',
+        'lime',
+        'green',
+        'emerald',
+        'teal',
+        'cyan',
+        'sky',
+        'blue',
+        'indigo',
+        'violet',
+        'purple',
+        'fuchsia',
+        'pink',
+        'rose',
+) !default;
+
+$other-variants: (
+        'secondary',
+        'light',
+        'dark',
+        'link'
+);
+
+$custom-variants: (
+        'primary',
+        'success',
+        'danger',
+        'warning',
+        'info'
+);

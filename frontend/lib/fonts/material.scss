@@ -1,0 +1,40 @@
+$icons: (
+        'material-icons': 'Material Icons',
+        'material-icons-round': 'Material Icons Round',
+        'material-icons-outlined': 'Material Icons Outlined',
+        'material-icons-sharp': 'Material Icons Sharp',
+        'material-icons-two-tone': 'Material Icons Two Tone'
+);
+
+
+@mixin material($className, $font-name, $ligatures) {
+  .#{$className} {
+    font-family: $font-name;
+    font-weight: normal;
+    font-style: normal;
+    font-size: var(--micon-font-size);
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    @if $ligatures == true {
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -moz-osx-font-smoothing: grayscale;
+      font-feature-settings: 'liga';
+    }
+  }
+}
+
+:root {
+  --micon-font-size: 24px;
+}
+
+@each $className, $font in $icons {
+  @include material($className, $font, true);
+}

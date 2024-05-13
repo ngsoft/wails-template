@@ -1,0 +1,17 @@
+@mixin card {
+  .card {
+    @apply block rounded-lg;
+    @apply bg-white shadow dark:bg-neutral-700;
+    @apply w-full md:w-[50vw];
+    .card-content {
+      @apply mb-4 text-base text-neutral-600 dark:text-neutral-200,;
+    }
+
+    .card-body {
+      @apply p-6;
+      .card-title {
+        @apply mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50;
+      }
+    }
+  }
+}

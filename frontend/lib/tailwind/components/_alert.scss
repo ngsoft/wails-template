@@ -1,0 +1,66 @@
+$done: false;
+
+
+@mixin alert($variant, $done: false) {
+
+  @if $done == false {
+
+    .alert {
+      @apply mb-2 rounded-lg px-4 py-3;
+      @apply w-full items-center select-none text-base;
+      @apply border-[1px] border-solid;
+      @apply transition duration-[250ms];
+
+      &.alert-dismissible {
+        @apply hidden data-[te-alert-show]:inline-flex;
+      }
+
+      &:not(.alert-dismissible) {
+        @apply inline-flex;
+      }
+
+      .alert-heading {
+        @apply mb-2 text-2xl font-medium leading-tight;
+      }
+
+      button[data-te-alert-dismiss] {
+        @apply ml-auto box-content rounded-none border-none p-1 opacity-50;
+        @apply hover:text-warning-900 hover:no-underline hover:opacity-75;
+        @apply focus:opacity-100 focus:shadow-none focus:outline-none;
+      }
+    }
+
+    #flash-messages .alert {
+      @apply cursor-pointer;
+    }
+
+  }
+
+  .alert-#{$variant} {
+
+
+    @apply text-#{$variant}-800 bg-#{$variant}-100/90 hover:bg-#{$variant}-100 border-#{$variant}-300;
+    @apply dark:text-#{$variant}-100;
+    @apply dark:bg-#{$variant}-800/90 dark:hover:bg-#{$variant}-800;
+
+
+    button[data-te-alert-dismiss] {
+      @apply text-#{$variant}-800 hover:text-#{$variant}-700 focus:text-#{$variant}-700 active:text-#{$variant}-600;
+      @apply dark:text-#{$variant}-100;
+    }
+
+    hr {
+      @apply border-#{$variant}-600/30;
+    }
+
+    .alert-link {
+      @apply underline font-bold;
+      @apply text-#{$variant}-800 hover:text-#{$variant}-700 focus:text-#{$variant}-700 active:text-#{$variant}-600;
+      @apply dark:text-#{$variant}-100 dark:hover:text-#{$variant}-200 dark:focus:text-#{$variant}-200 dark:active:text-#{$variant}-300;
+    }
+
+  }
+
+
+}
+

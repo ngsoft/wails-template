@@ -1,0 +1,4 @@
+.vscode
+*-lock.json
+*.md5
+*.cache

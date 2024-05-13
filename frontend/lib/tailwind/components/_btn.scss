@@ -1,0 +1,203 @@
+@use "variants" as *;
+@use "sass:list";
+
+
+$class-names: ('btn-custom');
+
+@each $variant in $variants {
+  $class-names: list.append($class-names, '.btn-#{$variant}', $separator: comma);
+  $class-names: list.append($class-names, '.btn-outline-#{$variant}', $separator: comma);
+
+}
+
+@each $variant in $custom-variants {
+  $class-names: list.append($class-names, '.btn-#{$variant}', $separator: comma);
+  $class-names: list.append($class-names, '.btn-outline-#{$variant}', $separator: comma);
+
+}
+
+@each $variant in $other-variants {
+  $class-names: list.append($class-names, '.btn-#{$variant}', $separator: comma);
+  $class-names: list.append($class-names, '.btn-outline-#{$variant}', $separator: comma);
+
+}
+
+
+@mixin shadows($variant, $dark-variant: null) {
+  @if $dark-variant == null {
+    $dark-variant: $variant;
+  }
+  @apply shadow-lg hover:shadow-md focus:shadow active:shadow-inner;
+  @apply shadow-#{$variant}/50 hover:shadow-#{$variant}/60 focus:shadow-#{$variant}/70 active:shadow-#{$variant}/80;
+  @apply dark:shadow-#{$dark-variant}/50 dark:hover:shadow-#{$dark-variant}/60 dark:focus:shadow-#{$dark-variant}/70 dark:shadow-#{$dark-variant}/80;
+}
+
+@mixin outline-shadow($variant, $dark-variant: null) {
+  @if $dark-variant == null {
+    $dark-variant: $variant;
+  }
+  @apply shadow-lg hover:shadow-md focus:shadow-md active:shadow-inner;
+  @apply shadow-#{$variant}/50 dark:shadow-#{$dark-variant}/50;
+  @apply hover:shadow-#{$variant}/50 hover:dark:shadow-#{$dark-variant}/50;
+  @apply focus:shadow-#{$variant}/50 focus:dark:shadow-#{$dark-variant}/50;
+  @apply active:shadow-#{$variant}/50 dark:active:shadow-#{$dark-variant}/50;
+}
+
+@mixin main {
+
+  .btn {
+    @apply inline-block font-medium leading-normal rounded cursor-pointer;
+    @apply transition duration-[250ms] ease-in-out;
+    @apply text-base px-4 py-2;
+  }
+  // default padding
+  .btn-base {
+    @apply text-base px-4 py-2;
+  }
+  .btn-xs {
+    @apply text-xs px-2 py-1.5;
+  }
+  .btn-sm {
+    @apply text-sm px-3 py-2;
+  }
+  .btn-md {
+    @apply px-[20px] py-3;
+  }
+  .btn-lg {
+    @apply text-lg px-[24px] py-4;
+  }
+  .btn-xl {
+    @apply text-xl px-[36px] py-[18px];
+  }
+
+  // .btn-outline
+
+  [class*="btn-outline"] {
+    @apply border-4;
+    @apply hover:bg-neutral-500/10 dark:hover:bg-white/40;
+    @apply focus:bg-neutral-500/10 dark:focus:bg-white/40;
+    @include outline-shadow("neutral-800", "neutral-900");
+  }
+
+  .btn-outline-light {
+    @apply capitalize;
+    @apply text-neutral-800 border-neutral-50;
+    @apply hover:text-neutral-900 hover:border-neutral-100;
+    @apply dark:text-neutral-50 dark:hover:text-neutral-100;
+    @apply hover:bg-neutral-500/10 dark:hover:bg-white/40;
+    @apply focus:bg-neutral-500/10 dark:focus:bg-white/40;
+    @apply active:text-neutral-900 dark:active:active:text-neutral-200 active:border-neutral-200;
+    @apply bg-neutral-200 dark:bg-transparent hover:bg-neutral-300;
+    @include outline-shadow("neutral-800", "neutral-100");
+  }
+  .btn-outline-dark {
+    @apply capitalize;
+    @apply text-neutral-800 border-neutral-800;
+    @apply dark:text-neutral-900 dark:border-neutral-900;
+    @apply active:text-neutral-900 active:border-neutral-900 active:bg-neutral-100/50;
+    @apply dark:active:text-black dark:active:border-black;
+    @include outline-shadow("neutral-800", "neutral-900");
+  }
+
+  .btn-outline-secondary {
+    @apply capitalize;
+    @apply text-primary-700 border-primary-100;
+    @apply hover:bg-primary-50/50 dark:hover:bg-primary-50/50;
+    @apply focus:bg-primary-50/50 dark:focus:bg-primary-50/50;
+    @apply hover:border-primary-accent-100 focus:border-primary-accent-100 active:border-primary-accent-200;
+    @include outline-shadow('primary-700');
+  }
+
+  // generate all colors
+
+  @each $variant in $custom-variants {
+    .btn-outline-#{$variant} {
+      @apply capitalize;
+      @apply text-#{$variant} border-#{$variant};
+      @apply hover:text-#{$variant} hover:bg-#{$variant}-50 hover:border-#{$variant};
+      @apply focus:text-#{$variant} focus:bg-#{$variant}-50 focus:border-#{$variant};
+      @apply dark:hover:text-#{$variant} dark:hover:bg-#{$variant}-50;
+      @apply dark:focus:text-#{$variant} dark:focus:bg-#{$variant}-50;
+      @apply active:text-#{$variant}-700 focus:bg-#{$variant}-50 active:border-#{$variant}-700;
+      @include outline-shadow($variant);
+    }
+  }
+
+  @each $variant in $variants {
+    .btn-outline-#{$variant} {
+      @apply capitalize;
+      @apply text-#{$variant}-500 border-#{$variant}-500;
+      @apply hover:bg-#{$variant}-50 dark:hover:bg-#{$variant}-100;
+      @apply focus:bg-#{$variant}-50 dark:focus:bg-#{$variant}-100;
+      @apply hover:text-#{$variant}-600 hover:border-#{$variant}-600;
+      @apply focus:text-#{$variant}-600 focus:border-#{$variant}-600;
+      @apply active:text-#{$variant}-700 active:border-#{$variant}-700;
+      @include outline-shadow("#{$variant}-500");
+    }
+  }
+
+
+  // normal buttons (material)
+
+  .btn-light {
+    @apply capitalize;
+    @apply text-neutral-800 dark:text-neutral-800;
+    @apply bg-neutral-50 hover:bg-neutral-200 active:bg-neutral-300;
+    @apply dark:bg-neutral-50 dark:hover:bg-neutral-200 dark:active:bg-neutral-300;
+    @include shadows("stone-300", "zinc-50");
+  }
+
+
+  .btn-dark {
+    @apply capitalize;
+    @apply text-neutral-50 dark:text-neutral-50;
+    @apply bg-neutral-800 hover:bg-neutral-800 active:bg-neutral-900;
+    @apply dark:bg-neutral-800 dark:hover:bg-neutral-800 dark:active:bg-neutral-900;
+    @include shadows("zinc-800", "black");
+  }
+
+  .btn-secondary {
+    @apply capitalize;
+    @apply text-primary-700 bg-primary-100 dark:text-primary-700 dark:bg-primary-100;
+    @apply hover:bg-primary-accent-100 focus:bg-primary-accent-100 active:bg-primary-accent-200;
+    @apply dark:hover:bg-primary-accent-100 dark:focus:bg-primary-accent-100 dark:active:bg-primary-accent-200;
+    @include shadows("secondary-600", "secondary-700");
+  }
+  // generate all colors
+
+  @each $variant in $custom-variants {
+    .btn-#{$variant} {
+      @apply capitalize;
+      @apply text-white bg-#{$variant} dark:text-white dark:bg-#{$variant};
+      @apply hover:bg-#{$variant}-600 focus:bg-#{$variant}-600 active:bg-#{$variant}-700;
+      @apply dark:hover:bg-#{$variant}-600 dark:focus:bg-#{$variant}-600 dark:active:bg-#{$variant}-700;
+      @include shadows(#{$variant}-600, #{$variant}-700);
+    }
+  }
+
+  @each $variant in $variants {
+    .btn-#{$variant} {
+      @apply capitalize;
+      @apply text-white bg-#{$variant}-500 dark:text-white dark:bg-#{$variant}-500;
+      @apply hover:bg-#{$variant}-600 focus:bg-#{$variant}-600 active:bg-#{$variant}-700;
+      @apply dark:hover:bg-#{$variant}-600 dark:focus:bg-#{$variant}-600 dark:active:bg-#{$variant}-700;
+      @include shadows(#{$variant}-600, #{$variant}-700);
+    }
+  }
+
+  // link
+  .btn-link {
+    @apply hover:underline underline-offset-[6px];
+    @apply text-primary dark:text-primary;
+    @apply hover:text-primary-600 dark:hover:text-primary-600;
+    @apply focus:text-primary-600 dark:focus:text-primary-600;
+    @apply active:text-primary-700 dark:active:text-primary-700;
+  }
+
+
+  // when disabled
+  .disabled.btn,
+  [disabled].btn {
+    @apply opacity-70 pointer-events-none shadow-none;
+  }
+}
