@@ -2,6 +2,8 @@ package main
 
 import (
 	"embed"
+	"goapp/backend/app/config"
+	"goapp/backend/service"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -16,50 +18,47 @@ var assets embed.FS
 
 func main() {
 	// Create an instance of the app structure
-	app := NewApp()
-
+	app := &wailsapp{}
+	// load configuration
+	cfg := config.Config()
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:             "myproject",
-		Width:             1280,
-		Height:            720,
-		MinWidth:          0,
-		MinHeight:         0,
-		MaxWidth:          0,
-		MaxHeight:         0,
-		DisableResize:     false,
-		Frameless:         false,
-		StartHidden:       false,
-		HideWindowOnClose: false,
-		AlwaysOnTop:       false,
-		// Normal     WindowStartState = 0
-		// Maximised  WindowStartState = 1
-		// Minimised  WindowStartState = 2
-		// Fullscreen WindowStartState = 3
-		WindowStartState: options.Normal,
+		Title:             cfg.GetString("Title"),
+		Width:             cfg.GetInt("Width"),
+		Height:            cfg.GetInt("Height"),
+		MinWidth:          cfg.GetInt("MinWidth"),
+		MinHeight:         cfg.GetInt("MinHeight"),
+		MaxWidth:          cfg.GetInt("MaxWidth"),
+		MaxHeight:         cfg.GetInt("MaxHeight"),
+		DisableResize:     cfg.GetBool("DisableResize"),
+		Frameless:         cfg.GetBool("Frameless"),
+		StartHidden:       cfg.GetBool("StartHidden"),
+		HideWindowOnClose: cfg.GetBool("HideWindowOnClose"),
+		AlwaysOnTop:       cfg.GetBool("AlwaysOnTop"),
+		WindowStartState:  options.WindowStartState(cfg.GetInt("WindowStartState")),
 		Windows: &windows.Options{
-			WebviewIsTransparent: false,
-			WindowIsTranslucent:  false,
-			DisableWindowIcon:    false,
+			WebviewIsTransparent: cfg.GetBool("WebviewIsTransparent"),
+			WindowIsTranslucent:  cfg.GetBool("WindowIsTranslucent"),
+			DisableWindowIcon:    cfg.GetBool("DisableWindowIcon"),
 		},
 		Mac: &mac.Options{
-			WebviewIsTransparent: false,
-			WindowIsTranslucent:  false,
+			WebviewIsTransparent: cfg.GetBool("WebviewIsTransparent"),
+			WindowIsTranslucent:  cfg.GetBool("WindowIsTranslucent"),
 		},
 		Linux: &linux.Options{
-			WindowIsTranslucent: false,
+			WindowIsTranslucent: cfg.GetBool("WindowIsTranslucent"),
 		},
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
-		BackgroundColour: &options.RGBA{R: 255, G: 255, B: 255, A: 255},
-		OnStartup:        app.OnStartup,
-		OnDomReady:       app.OnDomReady,
-		OnShutdown:       app.OnShutdown,
-		OnBeforeClose:    app.OnBeforeClose,
+		// BackgroundColour: &options.RGBA{R: 255, G: 255, B: 255, A: 255},
+		OnStartup:     app.onStartup,
+		OnDomReady:    app.onDomReady,
+		OnShutdown:    app.onShutdown,
+		OnBeforeClose: app.beforeClose,
 
 		Bind: []interface{}{
-			app,
+			service.Service(),
 		},
 	})
 
