@@ -13,6 +13,10 @@ const (
 	Ready    util.EventType = "wails.ready"
 	Shutdown util.EventType = "wails.shutdown"
 	Close    util.EventType = "wails.beforeclose"
+	Suspend  util.EventType = "wails.suspend"
+	Resume   util.EventType = "wails.resume"
+	Hide     util.EventType = "wails.hide"
+	Show     util.EventType = "wails.show"
 )
 
 type Application struct {
@@ -27,7 +31,10 @@ var app = &Application{
 	cfg:    config.Config(),
 }
 
-func App() *Application {
+func App(ctxs ...context.Context) *Application {
+	if len(ctxs) > 0 {
+		app.ctx = ctxs[0]
+	}
 	return app
 }
 
@@ -36,6 +43,12 @@ func (a *Application) Config() *util.Configuration {
 }
 
 func (a *Application) Hidden() bool {
+
+	// handle systray show app initialization (before Startup event)
+	if !util.IsRunning() {
+		return app.cfg.GetBool("StartHidden")
+	}
+
 	return a.hidden
 }
 
@@ -43,6 +56,7 @@ func (a *Application) Hide() {
 	if !a.Hidden() {
 		r.WindowHide(a.ctx)
 		a.hidden = true
+		util.DispatchEvent(Hide)
 	}
 
 }
@@ -51,29 +65,26 @@ func (a *Application) Show() {
 	if a.Hidden() {
 		r.WindowShow(a.ctx)
 		a.hidden = false
+		util.DispatchEvent(Show)
 	}
 }
-
-func (a *Application) OnEvent(e *util.Event) {
-	var (
-		ctx context.Context
-	)
-	if len(e.Params) > 0 {
-		if v, ok := e.Params[0].(context.Context); ok {
-			ctx = v
-
-		}
+func (a *Application) Quit() {
+	if !util.IsStopping() {
+		util.Stop(0)
+		r.Quit(a.ctx)
 	}
-	// a.Info("event: %v", e.Type)
+}
+func (a *Application) OnEvent(e *util.Event) {
 	switch e.Type {
 	case Startup:
-		a.ctx = ctx
+		if a.Config().GetBool("StartHidden") {
+			a.hidden = true
+		}
 		util.Start()
 	case Ready:
 	case Close:
 
 		if a.Config().GetBool("HideWindowOnClose") && a.Config().GetBool("EnableSystray") {
-			a.Info("hiding app")
 			a.Hide()
 			return
 		}

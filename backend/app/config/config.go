@@ -33,8 +33,10 @@ var (
 		// put your overrides, extra config there
 		map[string]interface{}{
 			"Title": "Wails + Svelte + Tailwind + AOS Demo",
+			// "Tooltip": "Show app",
 			// "HideWindowOnClose": true,
 			// "EnableSystray": true,
+			// "StartHidden":   true,
 		},
 	)
 )

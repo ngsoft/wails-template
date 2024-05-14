@@ -4,6 +4,7 @@ import (
 	"embed"
 	"goapp/backend/app/config"
 	"goapp/backend/service"
+	"goapp/backend/tray"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -17,10 +18,15 @@ import (
 var assets embed.FS
 
 func main() {
+
 	// Create an instance of the app structure
 	app := &wailsapp{}
 	// load configuration
 	cfg := config.Config()
+
+	// load tray
+	tray.Start()
+
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:            cfg.GetString("Title"),
@@ -39,6 +45,8 @@ func main() {
 			WebviewIsTransparent: cfg.GetBool("WebviewIsTransparent"),
 			WindowIsTranslucent:  cfg.GetBool("WindowIsTranslucent"),
 			DisableWindowIcon:    cfg.GetBool("DisableWindowIcon"),
+			OnSuspend:            app.onSuspend,
+			OnResume:             app.onResume,
 		},
 		Mac: &mac.Options{
 			WebviewIsTransparent: cfg.GetBool("WebviewIsTransparent"),
