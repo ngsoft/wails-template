@@ -1,4 +1,4 @@
-@use "components";
+//@use "components";
 
 
 @tailwind base;
@@ -6,31 +6,30 @@
 @tailwind utilities;
 
 @layer base {
-  *,
-  ::before,
-  ::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
 
-  html {
-    @apply text-black;
-  }
+    *,
+    ::before,
+    ::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-  html.dark {
-    @apply text-neutral-50;
-    @apply bg-neutral-800;
-  }
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        min-height: 100vh;
+    }
 }
 
 // put inside layer to use tailwind to override styles if needed
 @layer components {
-  @include components.execute;
-  
-  .flex-center {
-    @apply flex justify-center items-center;
-  }
+    //@include components.execute;
+    .flex-center {
+        @apply flex justify-center items-center;
+    }
 }
 
 

@@ -1,4 +1,5 @@
-import twElements from 'tw-elements/dist/plugin.cjs';
+import {skeleton} from '@skeletonlabs/tw-plugin';
+import {myTheme} from "./assets/theme.js";
 
 
 /** @type {import('tailwindcss').Config} */
@@ -9,14 +10,20 @@ export default {
         "./src/**/*.{svelte,js}",
         "./src/*.{scss,css}",
         "./assets/*.{scss,css}",
-        "./node_modules/tw-elements/dist/js/**/*.js",
+        "./node_modules/@skeletonlabs/skeleton/**/*.{html,js,svelte,ts}"
     ],
     theme: {
         extend: {},
     },
     plugins: [
-        twElements
+        skeleton({
+            themes: {
+                custom: [myTheme,]
+            }
+        })
     ],
     // added compatibility with other frameworks
     darkMode: ['class', '[data-mode="dark"]', '[data-bs-theme="dark"]'],
 };
+
+

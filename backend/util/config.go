@@ -24,7 +24,8 @@ func NewConfig(args ...interface{}) *Configuration {
 	}
 	return c
 }
-
+func (c *Configuration) LoadFromFile(file string)       {}
+func (c *Configuration) SaveToFile(file string)         {}
 func (c *Configuration) Set(n string, v interface{})    { c.__init().pairs[n] = v }
 func (c *Configuration) Export() map[string]interface{} { return c.__init().pairs }
 func (c *Configuration) Import(values map[string]interface{}) {

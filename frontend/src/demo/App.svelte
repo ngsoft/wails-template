@@ -7,11 +7,21 @@
     import {MATERIAL_OUTLINED} from "@/fonts";
     import Aos from "@/components/Aos.svelte";
     import {AOS_SLIDE_UP, AOS_EASING_LINEAR} from "@/animate.js";
+    import {onMount} from 'svelte';
+    import {autoModeWatcher} from '@skeletonlabs/skeleton';
+    import {LightSwitch} from '@skeletonlabs/skeleton';
 
+    onMount(() => {
+        autoModeWatcher();
+    })
 
 </script>
+<div class="absolute top-1.5 right-1.5">
+    <LightSwitch/>
+</div>
 <Aos once force transition="{AOS_SLIDE_UP}" duration={750} delay={250} easing={AOS_EASING_LINEAR}
-     extraClass="h-full">
+     extraClass="h-full w-full">
+
     <main class="h-full flex flex-col justify-center">
         <div class="flex justify-center">
             <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
@@ -37,5 +47,8 @@
         </p>
 
         <p class="read-the-docs">Click on the Vite and Svelte logos to learn more</p>
+
+
     </main>
 </Aos>
+

@@ -5,6 +5,14 @@ import (
 )
 
 var (
+	customConfig = map[string]interface{}{
+		// put your overrides, extra config there
+		"Title": "Wails + Svelte + Tailwind + AOS Demo",
+		// "Tooltip": "Show app",
+		// "HideWindowOnClose": true,
+		// "EnableSystray":     true,
+		// "StartHidden":   true,
+	}
 	defaultConfig = map[string]interface{}{
 		"Title":             "goapp",
 		"Width":             0,
@@ -30,14 +38,7 @@ var (
 
 	config = util.NewConfig(
 		defaultConfig,
-		// put your overrides, extra config there
-		map[string]interface{}{
-			"Title": "Wails + Svelte + Tailwind + AOS Demo",
-			// "Tooltip": "Show app",
-			// "HideWindowOnClose": true,
-			// "EnableSystray": true,
-			// "StartHidden":   true,
-		},
+		customConfig,
 	)
 )
 

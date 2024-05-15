@@ -11,15 +11,16 @@ import '@/fonts';
 
 /** =========  Import your app there  ========= */
 
-// demo app /!\ that method does not supports dynamic asset loading (await import())
+// demo app /!\ that method does not support dynamic asset loading (await import())
 // for that please use the dom router
 import App from "./demo/App.svelte";
-export default new App({ target: document.getElementById("app") });
+
+export default new App({target: document.getElementById("app")});
 
 // this is a dynamic router that detects dom changes and loads components inside it
-import router from "@/dom-router.js";
-import routes from "./routes";
-router(routes);
+// import router from "@/dom-router.js";
+// import routes from "./routes";
+// router(routes);
 
 /** =========================================== */
 
