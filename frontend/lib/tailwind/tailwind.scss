@@ -4,6 +4,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind variants;
 
 @layer base {
 
@@ -20,8 +21,18 @@
     }
 
     body {
+        height: 100%;
+        overflow: hidden;
         min-height: 100vh;
     }
+
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
+        -webkit-appearance: none;
+    }
+
 }
 
 // put inside layer to use tailwind to override styles if needed
@@ -29,6 +40,11 @@
     //@include components.execute;
     .flex-center {
         @apply flex justify-center items-center;
+    }
+
+
+    .wails-draggable {
+        --wails-draggable: drag;
     }
 }
 

@@ -1,3 +1,5 @@
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
 import {skeleton} from '@skeletonlabs/tw-plugin';
 import {myTheme} from "./assets/theme.js";
 
@@ -5,10 +7,9 @@ import {myTheme} from "./assets/theme.js";
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
-        "./lib/**/*.{svelte,js}",
-        "./lib/*.{scss,css}",
-        "./src/**/*.{svelte,js}",
-        "./src/*.{scss,css}",
+        "./index.html",
+        "./lib/**/*.{svelte,js,scss,css}",
+        "./src/**/*.{svelte,js,scss,css}",
         "./assets/*.{scss,css}",
         "./node_modules/@skeletonlabs/skeleton/**/*.{html,js,svelte,ts}"
     ],
@@ -16,10 +17,17 @@ export default {
         extend: {},
     },
     plugins: [
+        forms,
+        typography,
         skeleton({
             themes: {
-                custom: [myTheme,]
-            }
+                preset: [
+                    {
+                        name: 'hamlindigo',
+                        enhancements: true,
+                    },
+                ],
+            },
         })
     ],
     // added compatibility with other frameworks

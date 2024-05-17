@@ -12,6 +12,7 @@ var (
 		// "HideWindowOnClose": true,
 		// "EnableSystray":     true,
 		// "StartHidden":   true,
+		"Frameless": true,
 	}
 	defaultConfig = map[string]interface{}{
 		"Title":             "goapp",

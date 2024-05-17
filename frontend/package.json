@@ -17,15 +17,21 @@
         "svelte": "^4.2.16",
         "tailwindcss": "^3.4.3",
         "unplugin-fonts": "^1.1.1",
-        "vite": "^5.2.11"
+        "vite": "^5.2.11",
+        "@tailwindcss/forms": "^0.5.7",
+        "@tailwindcss/typography": "^0.5.13",
+        "postcss": "^8.4.38",
+        "svelte-check": "^3.7.1"
     },
     "dependencies": {
+        "@floating-ui/dom": "^1.6.5",
         "@fontsource/material-icons": "^5.0.18",
         "@fontsource/material-icons-outlined": "^5.0.12",
         "@fontsource/material-icons-round": "^5.0.12",
         "@fontsource/material-icons-sharp": "^5.0.12",
         "@fontsource/material-icons-two-tone": "^5.0.12",
         "@fontsource/poppins": "^5.0.14",
-        "aos": ">=2"
+        "aos": ">=2",
+        "highlight.js": "^11.9.0"
     }
 }

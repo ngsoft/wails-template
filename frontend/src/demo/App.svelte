@@ -7,48 +7,42 @@
     import {MATERIAL_OUTLINED} from "@/fonts";
     import Aos from "@/components/Aos.svelte";
     import {AOS_SLIDE_UP, AOS_EASING_LINEAR} from "@/animate.js";
-    import {onMount} from 'svelte';
-    import {autoModeWatcher} from '@skeletonlabs/skeleton';
-    import {LightSwitch} from '@skeletonlabs/skeleton';
+    import Layout from "app/Layout.svelte";
 
-    onMount(() => {
-        autoModeWatcher();
-    })
 
 </script>
-<div class="absolute top-1.5 right-1.5">
-    <LightSwitch/>
-</div>
-<Aos once force transition="{AOS_SLIDE_UP}" duration={750} delay={250} easing={AOS_EASING_LINEAR}
-     extraClass="h-full w-full">
+<Layout>
 
-    <main class="h-full flex flex-col justify-center">
-        <div class="flex justify-center">
-            <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-                <img src={viteLogo} class="logo" alt="Vite Logo"/>
-            </a>
-            <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-                <img src={svelteLogo} class="logo svelte" alt="Svelte Logo"/>
-            </a>
+    <Aos once force transition="{AOS_SLIDE_UP}" duration={750} delay={250} easing={AOS_EASING_LINEAR}
+         extraClass="h-full w-full">
+        <div id="demo" class="h-full flex flex-col justify-center">
+            <div class="flex justify-center">
+                <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
+                    <img src={viteLogo} class="logo" alt="Vite Logo"/>
+                </a>
+                <a href="https://svelte.dev" target="_blank" rel="noreferrer">
+                    <img src={svelteLogo} class="logo svelte" alt="Svelte Logo"/>
+                </a>
+            </div>
+            <h1>Vite + Svelte</h1>
+
+            <div class="_card">
+                <Counter/>
+            </div>
+
+            <p>
+                <Micon name="info" variant={MATERIAL_OUTLINED}></Micon>
+                Check out <a
+                href="https://github.com/sveltejs/kit#readme"
+                target="_blank"
+                rel="noreferrer">SvelteKit</a
+            >, the official Svelte app framework powered by Vite!
+            </p>
+
+            <p class="read-the-docs">Click on the Vite and Svelte logos to learn more</p>
+
+
         </div>
-        <h1>Vite + Svelte</h1>
+    </Aos>
 
-        <div class="_card">
-            <Counter/>
-        </div>
-
-        <p>
-            <Micon name="info" variant={MATERIAL_OUTLINED}></Micon>
-            Check out <a
-            href="https://github.com/sveltejs/kit#readme"
-            target="_blank"
-            rel="noreferrer">SvelteKit</a
-        >, the official Svelte app framework powered by Vite!
-        </p>
-
-        <p class="read-the-docs">Click on the Vite and Svelte logos to learn more</p>
-
-
-    </main>
-</Aos>
-
+</Layout>
