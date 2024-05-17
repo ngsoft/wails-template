@@ -14,6 +14,10 @@ export function AppSetConfig(arg1, arg2) {
   return window['go']['service']['service']['AppSetConfig'](arg1, arg2);
 }
 
+export function CloseWindow() {
+  return window['go']['service']['service']['CloseWindow']();
+}
+
 export function GreetName(arg1) {
   return window['go']['service']['service']['GreetName'](arg1);
 }

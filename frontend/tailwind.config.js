@@ -1,8 +1,6 @@
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 import {skeleton} from '@skeletonlabs/tw-plugin';
-import {myTheme} from "./assets/theme.js";
-
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -13,6 +11,8 @@ export default {
         "./assets/*.{scss,css}",
         "./node_modules/@skeletonlabs/skeleton/**/*.{html,js,svelte,ts}"
     ],
+    // preload all colors (less optimised css size)
+    // safelist: [{pattern: /(bg|text|shadow|btn|alert|outline)-(slate|gray|zinc|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuschia|pink|rose|primary|secondary|success|danger|warning|info)/}],
     theme: {
         extend: {},
     },

@@ -7,4 +7,6 @@ export function AppGetConfiguration():Promise<{[key: string]: any}>;
 
 export function AppSetConfig(arg1:string,arg2:any):Promise<void>;
 
+export function CloseWindow():Promise<void>;
+
 export function GreetName(arg1:string):Promise<string>;

@@ -8,14 +8,20 @@ var (
 	customConfig = map[string]interface{}{
 		// put your overrides, extra config there
 		"Title": "Wails + Svelte + Tailwind + AOS Demo",
+		// used on skeleton header if defined:
+		"AppTitle": "My Wails Template",
 		// "Tooltip": "Show app",
 		// "HideWindowOnClose": true,
 		// "EnableSystray":     true,
 		// "StartHidden":   true,
-		"Frameless": true,
+		// "Frameless": true,
+		// "MinWidth":  1280,
+		// "MinHeight": 720,
+		// "MaxWidth":  1280,
+		// "MaxHeight": 720,
 	}
 	defaultConfig = map[string]interface{}{
-		"Title":             "goapp",
+		"Title":             "Wails + Svelte + Tailwind + AOS Demo",
 		"Width":             0,
 		"Height":            0,
 		"MinWidth":          1024,

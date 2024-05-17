@@ -43,8 +43,14 @@
     }
 
 
+    // wails frameless mode on header
     .wails-draggable {
         --wails-draggable: drag;
+        cursor: grab;
+
+        &:active {
+            cursor: grabbing;
+        }
     }
 }
 
