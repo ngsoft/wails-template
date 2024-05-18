@@ -49,15 +49,20 @@ func Tray(ctxs ...context.Context) *tray {
 func Start() {
 	if !instance.init {
 		instance.init = true
+		instance.icons = util.NewEmbedFs(icons, "icons")
+		instance.SetLoggerPrefix("[systray]")
 		if !instance.cfg.GetBool("EnableSystray") {
 			return
 		}
-		instance.icons = util.NewEmbedFs(icons, "icons")
-		instance.SetLoggerPrefix("[systray]")
 		util.AddEventHandler(instance)
 		SetupSystray(Menu{})
 		systray.Register(instance.onReady, instance.onExit)
 	}
+}
+
+func GetIcon(fileName string) []byte {
+	ico, _ := instance.icons.GetFileBytes(fileName)
+	return ico
 }
 
 func (t *tray) onReady() {
@@ -68,7 +73,7 @@ func (t *tray) onReady() {
 	if tooltip == "" {
 		tooltip = t.cfg.GetString("Title")
 	}
-	ico, _ := t.icons.GetFileBytes("icon.ico")
+	ico := GetIcon("icon.ico")
 	systray.SetTemplateIcon(ico, ico)
 	systray.SetTitle(t.cfg.GetString("Title"))
 	systray.SetTooltip(tooltip)

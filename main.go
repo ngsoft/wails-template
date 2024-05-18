@@ -69,6 +69,7 @@ func main() {
 		},
 		Linux: &linux.Options{
 			WindowIsTranslucent: cfg.GetBool("WindowIsTranslucent"),
+			Icon:                tray.GetIcon("icon.png"),
 		},
 		AssetServer: &assetserver.Options{
 			Assets: assets,
