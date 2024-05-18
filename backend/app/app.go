@@ -22,13 +22,11 @@ const (
 type Application struct {
 	util.Logger
 	ctx    context.Context
-	cfg    *util.Configuration
 	hidden bool
 }
 
 var app = &Application{
 	Logger: util.NewLogger("[app]"),
-	cfg:    config.Config(),
 }
 
 func App(ctxs ...context.Context) *Application {
@@ -38,54 +36,49 @@ func App(ctxs ...context.Context) *Application {
 	return app
 }
 
-func (a *Application) Config() *util.Configuration {
-	return a.cfg
-}
-
-func (a *Application) Hidden() bool {
+func Hidden() bool {
 
 	// handle systray show app initialization (before Startup event)
 	if !util.IsRunning() {
-		return app.cfg.GetBool("StartHidden")
+		return config.Config().GetBool("StartHidden")
 	}
-
-	return a.hidden
+	return app.hidden
 }
 
-func (a *Application) Hide() {
-	if !a.Hidden() {
-		r.WindowHide(a.ctx)
-		a.hidden = true
+func HideWindow() {
+	if !Hidden() {
+		r.WindowHide(app.ctx)
+		app.hidden = true
 		util.DispatchEvent(Hide)
 	}
 
 }
 
-func (a *Application) Show() {
-	if a.Hidden() {
-		r.WindowShow(a.ctx)
-		a.hidden = false
+func ShowWindow() {
+	if Hidden() {
+		r.WindowShow(app.ctx)
+		app.hidden = false
 		util.DispatchEvent(Show)
 	}
 }
-func (a *Application) Quit() {
+func Quit() {
 	if !util.IsStopping() {
 		util.Stop(0)
-		r.Quit(a.ctx)
+		r.Quit(app.ctx)
 	}
 }
 func (a *Application) OnEvent(e *util.Event) {
 	switch e.Type {
 	case Startup:
-		if a.Config().GetBool("StartHidden") {
-			a.hidden = true
+		if config.Config().GetBool("StartHidden") && config.Config().GetBool("EnableSystray") {
+			app.hidden = true
 		}
 		util.Start()
 	case Ready:
 	case Close:
 
-		if a.Config().GetBool("HideWindowOnClose") && a.Config().GetBool("EnableSystray") {
-			a.Hide()
+		if config.Config().GetBool("HideWindowOnClose") && config.Config().GetBool("EnableSystray") {
+			HideWindow()
 			return
 		}
 

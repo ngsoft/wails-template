@@ -26,13 +26,29 @@ func NewConfig(args ...interface{}) *Configuration {
 	}
 	return c
 }
-func (c *Configuration) LoadFromFile(file string)       {}
-func (c *Configuration) SaveToFile(file string)         {}
+func (c *Configuration) LoadFromFile(fileName string) bool {
+	var (
+		ok  bool
+		obj interface{}
+		l   map[string]interface{}
+	)
+	if obj, ok = FileGetJson(fileName); ok {
+		if l, ok = obj.(map[string]interface{}); ok {
+			c.Import(l)
+		}
+	}
+	return ok
+}
+func (c *Configuration) SaveToFile(fileName string) bool {
+	return FilePutContents(fileName, c.ToJson())
+}
 func (c *Configuration) Set(n string, v interface{})    { c.__init().pairs[n] = v }
 func (c *Configuration) Export() map[string]interface{} { return c.__init().pairs }
 func (c *Configuration) ToJson() string {
-	var result string = "null"
-	if b, err := json.Marshal(c.Export()); err != nil {
+	var (
+		result = "null"
+	)
+	if b, err := json.Marshal(c.Export()); err == nil {
 		result = string(b)
 	}
 
@@ -114,5 +130,5 @@ func (c *Configuration) GetValue(n string) interface{} {
 }
 
 func (c *Configuration) SetValue(n string, v interface{}) {
-	c.__init().pairs[n] = v
+	c.Set(n, v)
 }

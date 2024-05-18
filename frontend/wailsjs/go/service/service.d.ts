@@ -3,10 +3,8 @@
 
 export function AppGetConfig(arg1:string):Promise<any>;
 
-export function AppGetConfiguration():Promise<{[key: string]: any}>;
+export function AppSetConfig(arg1:string,arg2:any):Promise<boolean>;
 
-export function AppSetConfig(arg1:string,arg2:any):Promise<void>;
+export function AppSetOverride(arg1:string,arg2:any):Promise<boolean>;
 
 export function CloseWindow():Promise<void>;
-
-export function GreetName(arg1:string):Promise<string>;

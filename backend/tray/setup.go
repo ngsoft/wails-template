@@ -1,7 +1,7 @@
 package tray
 
 // SetupSystray please put your systray menu items and handlers there
-func SetupSystray(menu TrayMenu) {
+func SetupSystray(menu Menu) {
 
 	// menu.AddItem(
 	// 	NewItem("My Switch", func(i *Item) {

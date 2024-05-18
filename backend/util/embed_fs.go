@@ -12,7 +12,7 @@ type EmbedFs struct {
 	root string
 }
 
-// get ready to read data from an embed fs with a root path specified
+// NewEmbedFs get ready to read data from an embed fs with a root path specified
 func NewEmbedFs(fs embed.FS, rootPaths ...string) *EmbedFs {
 	root := filepath.Join(rootPaths...)
 	root = filepath.ToSlash(root)
@@ -22,7 +22,7 @@ func NewEmbedFs(fs embed.FS, rootPaths ...string) *EmbedFs {
 	}
 }
 
-// get bytes of a file from embed fs
+// GetFileBytes get bytes of a file from embed fs
 func (e *EmbedFs) GetFileBytes(filePaths ...string) (data []byte, err error) {
 	name := filepath.Join(append([]string{e.root}, filePaths...)...)
 	name = filepath.ToSlash(name)
@@ -30,7 +30,7 @@ func (e *EmbedFs) GetFileBytes(filePaths ...string) (data []byte, err error) {
 	return
 }
 
-// load JSON file to a go struct instance from embed fs
+// LoadJSON load JSON file to a go struct instance from embed fs
 func (e *EmbedFs) LoadJSON(v any, filePaths ...string) error {
 	data, err := e.GetFileBytes(filePaths...)
 	if err != nil {
@@ -39,7 +39,7 @@ func (e *EmbedFs) LoadJSON(v any, filePaths ...string) error {
 	return json.Unmarshal(data, v)
 }
 
-// wallk through all files in a directory of embed fs
+// WalkDir walk through all files in a directory of embed fs
 func (e *EmbedFs) WalkDir(callback func(path string, isDir bool, f fs.DirEntry) error, dirPaths ...string) error {
 	dir := filepath.Join(append([]string{e.root}, dirPaths...)...)
 	dir = filepath.ToSlash(dir)

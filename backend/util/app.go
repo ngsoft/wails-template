@@ -15,7 +15,20 @@ var (
 	executablePath          string
 )
 
+func GetConfigPath(elem ...string) string {
+	var (
+		root string
+		err  error
+	)
+
+	if root, err = os.UserConfigDir(); err != nil {
+		panic("cannot find user profile")
+	}
+	return filepath.Join(append([]string{root}, elem...)...)
+}
+
 func GetExecutablePath(elem ...string) string {
+	findExecutablePath()
 	return filepath.Join(append([]string{executablePath}, elem...)...)
 }
 
@@ -52,13 +65,19 @@ func setTraps() {
 	}
 }
 
+func findExecutablePath() {
+	if executablePath == "" {
+		exe, err := os.Executable()
+		if err != nil {
+			panic("failed to get executable path")
+		}
+		executablePath = filepath.Dir(exe)
+	}
+}
+
 func onStart() {
 	started = true
-	exe, err := os.Executable()
-	if err != nil {
-		panic("failed to get executable path")
-	}
-	executablePath = filepath.Dir(exe)
+	findExecutablePath()
 	DispatchEvent(InitializeEvent)
 
 }

@@ -25,9 +25,9 @@ type tray struct {
 	init       bool
 }
 
-type TrayMenu struct{}
+type Menu struct{}
 
-func (TrayMenu) AddItem(v ...*Item) {
+func (Menu) AddItem(v ...*Item) {
 	for _, i := range v {
 		instance.items[i] = true
 	}
@@ -38,6 +38,7 @@ var instance = &tray{
 	items: make(map[*Item]bool),
 }
 
+//goland:noinspection ALL
 func Tray(ctxs ...context.Context) *tray {
 	if len(ctxs) > 0 {
 		instance.ctx = ctxs[0]
@@ -54,7 +55,7 @@ func Start() {
 		instance.icons = util.NewEmbedFs(icons, "icons")
 		instance.SetLoggerPrefix("[systray]")
 		util.AddEventHandler(instance)
-		SetupSystray(TrayMenu{})
+		SetupSystray(Menu{})
 		systray.Register(instance.onReady, instance.onExit)
 	}
 }
@@ -73,17 +74,17 @@ func (t *tray) onReady() {
 	systray.SetTooltip(tooltip)
 
 	t.openWindow = NewItem("Show App", func(i *Item) {
-		app.App().Show()
+		app.ShowWindow()
 		i.MenuItem().Hide()
 	})
 	t.quit = NewItem("Quit", func(i *Item) {
-		app.App().Quit()
+		app.Quit()
 	})
 	// initialize menus
 	if t.cfg.GetBool("HideWindowOnClose") || t.cfg.GetBool("StartHidden") {
 		items = append(items, t.openWindow)
 		t.openWindow.register()
-		if !app.App().Hidden() {
+		if !app.Hidden() {
 			t.openWindow.MenuItem().Hide()
 		}
 	}

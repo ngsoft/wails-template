@@ -2,6 +2,7 @@ package util
 
 type Status int
 
+//goland:noinspection GoSnakeCaseUsage
 const (
 	STATUS_INITIAL Status = iota
 	STATUS_ON

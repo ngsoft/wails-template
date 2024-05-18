@@ -24,7 +24,22 @@ func main() {
 	// load configuration
 	cfg := config.Config()
 
-	// load tray
+	// specific configuration overrides
+	func() {
+		// override config to let svelte have a read
+		if cfg.GetInt("MaxWidth") > 0 && cfg.GetInt("MaxHeight") > 0 &&
+			cfg.GetInt("MaxWidth") == cfg.GetInt("MinWidth") && cfg.GetInt("MaxHeight") == cfg.GetInt("MinHeight") {
+			cfg.Set("DisableResize", true)
+		}
+		if !cfg.GetBool("EnableSystray") {
+			// force the settings
+			cfg.Set("StartHidden", false)       // how can we show the window ?
+			cfg.Set("HideWindowOnClose", false) //window disappears, never to be seen again (how do we close the app then?)
+		}
+
+	}()
+
+	// load tray (can only be setup in the main thread)
 	tray.Start()
 
 	// Create application with options
@@ -58,12 +73,13 @@ func main() {
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
-		// BackgroundColour: &options.RGBA{R: 255, G: 255, B: 255, A: 255},
+		// set up handlers
 		OnStartup:     app.onStartup,
 		OnDomReady:    app.onDomReady,
 		OnShutdown:    app.onShutdown,
 		OnBeforeClose: app.beforeClose,
 
+		// add your own exposed services
 		Bind: []interface{}{
 			service.Service(),
 		},

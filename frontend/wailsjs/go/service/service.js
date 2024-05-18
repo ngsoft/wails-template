@@ -6,18 +6,14 @@ export function AppGetConfig(arg1) {
   return window['go']['service']['service']['AppGetConfig'](arg1);
 }
 
-export function AppGetConfiguration() {
-  return window['go']['service']['service']['AppGetConfiguration']();
-}
-
 export function AppSetConfig(arg1, arg2) {
   return window['go']['service']['service']['AppSetConfig'](arg1, arg2);
 }
 
-export function CloseWindow() {
-  return window['go']['service']['service']['CloseWindow']();
+export function AppSetOverride(arg1, arg2) {
+  return window['go']['service']['service']['AppSetOverride'](arg1, arg2);
 }
 
-export function GreetName(arg1) {
-  return window['go']['service']['service']['GreetName'](arg1);
+export function CloseWindow() {
+  return window['go']['service']['service']['CloseWindow']();
 }
