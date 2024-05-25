@@ -34,7 +34,10 @@ func main() {
 		}
 		if runtime.GOOS == "darwin" {
 			cfg.Set("EnableSystray", false)
-			cfg.Set("MaximizeFullscreen", true)
+			// disable frameless if fullscreen needed
+			if cfg.GetBool("MaximizeFullscreen") {
+				cfg.Set("Frameless", false)
+			}
 		}
 		if !cfg.GetBool("EnableSystray") {
 			// force the settings
