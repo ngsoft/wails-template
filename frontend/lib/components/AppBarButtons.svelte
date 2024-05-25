@@ -1,8 +1,7 @@
 <script>
 
-    import {WindowMinimise, WindowToggleMaximise} from "../../wailsjs/runtime/runtime.js";
-    import {AppGetConfig, CloseWindow} from "../../wailsjs/go/service/service.js";
-    import {popup} from "@skeletonlabs/skeleton";
+    import {WindowMinimise} from "../../wailsjs/runtime/runtime.js";
+    import {AppGetConfig, CloseWindow, WindowToggleMaximise} from "../../wailsjs/go/service/service.js";
     import {writable} from "svelte/store";
     import Micon from "@/components/Micon.svelte";
 

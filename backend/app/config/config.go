@@ -31,6 +31,7 @@ var (
 		"WebviewIsTransparent": false,
 		"WindowIsTranslucent":  false,
 		"DisableWindowIcon":    false,
+		"MaximizeFullscreen":   false,
 	}
 
 	config = util.NewConfig(

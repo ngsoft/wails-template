@@ -67,6 +67,19 @@ func Quit() {
 		r.Quit(app.ctx)
 	}
 }
+
+func ToggleMaximise() {
+	if config.Config().GetBool("MaximizeFullscreen") {
+		if r.WindowIsFullscreen(app.ctx) {
+			r.WindowUnfullscreen(app.ctx)
+			return
+		}
+		r.WindowFullscreen(app.ctx)
+		return
+	}
+	r.WindowToggleMaximise(app.ctx)
+}
+
 func (a *Application) OnEvent(e *util.Event) {
 	switch e.Type {
 	case Startup:

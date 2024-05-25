@@ -9,13 +9,13 @@ var (
 		"AppId": "template",
 		// put your overrides, extra config there
 		"Title": "Wails + Svelte + Tailwind + AOS Demo",
-
 		// "Tooltip": "Show app", // systray hover tooltip
 		// "DisableResize":     true,
 		// "EnableSystray":     true,
 		// "HideWindowOnClose": true, // not used if "EnableSystray" is not active, a custom handler manage that state as wails do not tell us when the window is hidden
 		// "StartHidden":       true, // not used if "EnableSystray" is not active
-		// "Frameless": true,
+		// "Frameless":          true,
+		// "MaximizeFullscreen": true, // set fullscreen mode on maximize (set to true on darwin, only works on frameless)
 		// "MinWidth":  1280,
 		// "MinHeight": 720,
 		// "MaxWidth":  1280, // if set app will not be maximizable

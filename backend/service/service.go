@@ -80,3 +80,8 @@ func (*service) AppSetOverride(name string, value interface{}) bool {
 	defer ovrCfgLock.Unlock()
 	return cfg.SaveToFile(filename)
 }
+
+// AppSetOverride set js config and saves it to file
+func (*service) WindowToggleMaximise() {
+	app.ToggleMaximise()
+}
