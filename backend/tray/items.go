@@ -1,7 +1,7 @@
 package tray
 
 import (
-	"github.com/getlantern/systray"
+	"github.com/aenmo/systray"
 )
 
 type Item struct {

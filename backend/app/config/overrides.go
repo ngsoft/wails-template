@@ -12,7 +12,7 @@ var (
 
 		// "Tooltip": "Show app", // systray hover tooltip
 		// "DisableResize":     true,
-		// "EnableSystray": true,
+		// "EnableSystray":     true,
 		// "HideWindowOnClose": true, // not used if "EnableSystray" is not active, a custom handler manage that state as wails do not tell us when the window is hidden
 		// "StartHidden":       true, // not used if "EnableSystray" is not active
 		// "Frameless": true,

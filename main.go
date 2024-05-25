@@ -5,6 +5,7 @@ import (
 	"goapp/backend/app/config"
 	"goapp/backend/service"
 	"goapp/backend/tray"
+	"runtime"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -30,6 +31,9 @@ func main() {
 		if cfg.GetInt("MaxWidth") > 0 && cfg.GetInt("MaxHeight") > 0 &&
 			cfg.GetInt("MaxWidth") == cfg.GetInt("MinWidth") && cfg.GetInt("MaxHeight") == cfg.GetInt("MinHeight") {
 			cfg.Set("DisableResize", true)
+		}
+		if runtime.GOOS == "darwin" {
+			cfg.Set("EnableSystray", false)
 		}
 		if !cfg.GetBool("EnableSystray") {
 			// force the settings

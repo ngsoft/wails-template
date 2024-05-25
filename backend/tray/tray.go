@@ -7,7 +7,7 @@ import (
 	"goapp/backend/app/config"
 	"goapp/backend/util"
 
-	"github.com/getlantern/systray"
+	"github.com/aenmo/systray"
 )
 
 //go:embed icons
