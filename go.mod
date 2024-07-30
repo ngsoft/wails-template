@@ -7,7 +7,7 @@ toolchain go1.22.3
 require (
 	github.com/aenmo/systray v1.2.4-0.20240408015310-0b6a0d5ef31d
 	github.com/satori/go.uuid v1.2.0
-	github.com/wailsapp/wails/v2 v2.8.2
+	github.com/wailsapp/wails/v2 v2.9.1
 )
 
 require (

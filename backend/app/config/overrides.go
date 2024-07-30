@@ -14,7 +14,7 @@ var (
 		// "EnableSystray":     true,
 		// "HideWindowOnClose": true, // not used if "EnableSystray" is not active, a custom handler manage that state as wails do not tell us when the window is hidden
 		// "StartHidden":       true, // not used if "EnableSystray" is not active
-		// "Frameless":          true,
+		// "Frameless": true,
 		// "MaximizeFullscreen": true, // set fullscreen mode on maximize (only works for frameless, if set to true on mac frameless will be disabled)
 		// "MinWidth":  1280,
 		// "MinHeight": 720,

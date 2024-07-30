@@ -3,3 +3,5 @@
 *.md5
 *.cache
 go
+runtime
+!runtime/package.json
